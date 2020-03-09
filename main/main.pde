@@ -19,7 +19,7 @@ void setup()
     for(int j = 0; j < carres_number; j++)
     {
       float x = map(i, 0, carres_number, start, stop_x);
-      float y = map(i, 0, carres_number, start, stop_y);
+      float y = map(j, 0, carres_number, start, stop_y);
       
       if(grid[i][j] == 0)
       {
