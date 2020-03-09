@@ -8,7 +8,7 @@ void setup()
   noStroke();
   background(0);
   
-  gD = new GridDisplayer(new PVector(0, 0), 800, 10);
+  gD = new GridDisplayer(new PVector(0, 0), 800, carres_number);
   
   int[][] grid = generateInitialGrid(carres_number);
   
