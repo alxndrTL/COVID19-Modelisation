@@ -13,7 +13,6 @@ class GridDisplayer
     size = _size;
     num = _num;
     
-    //stop_point = start_point.add(new PVector(size, size)); // START POINT MOFIFIE
     stop_point = PVector.add(start_point, new PVector(size, size));
     print(start_point.x);
   }
@@ -36,7 +35,7 @@ class GridDisplayer
           fill(100, 150, 160);
         }
         
-        square(x, y, stop_point.x/num);
+        square(x, y, size/num);
       }
     }
   }
