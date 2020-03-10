@@ -25,6 +25,7 @@ void setup() {
   plot.getXAxis().setAxisLabelText("x axis");
   plot.getYAxis().setAxisLabelText("y axis");
   
+  //plot.getYAxis().setOffset(-5);
   plot.getYAxis().setLineColor(255);
   plot.getYAxis().setLineWidth(3);
   plot.getYAxis().setFontColor(255);
@@ -40,9 +41,11 @@ void setup() {
   
   plot.setLineColor(255);
   plot.setLineWidth(3);
+  
 
   // Draw it!
   plot.beginDraw();
+  plot.setAxesOffset(0);
   //plot.drawBackground();
   //plot.drawBox();
   plot.drawXAxis();
@@ -56,7 +59,7 @@ void setup() {
   plot.endDraw();
   
   // A VOIR : 
-  //plot1.activatePanning();
+  //plot.activatePanning();
   //plot1.activateZooming(1.2, CENTER, CENTER);
   //plot1.activatePointLabels();
   //plot2.activateZooming(1.5);
