@@ -1,9 +1,9 @@
 class Cell
 {
+  int state;
   
-  
-  Cell()
+  Cell(int _state)
   {
-    
+    state = _state;
   }
 }

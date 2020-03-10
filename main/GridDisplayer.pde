@@ -17,7 +17,7 @@ class GridDisplayer
     print(start_point.x);
   }
   
-  void display(int[][] grid)
+  void display(Cell[][] grid)
   {    
     for(int i = 0; i < num; i++)
     {
@@ -26,7 +26,7 @@ class GridDisplayer
         float x = map(i, 0, num, start_point.x, stop_point.x);
         float y = map(j, 0, num, start_point.y, stop_point.y);
       
-        if(grid[i][j] == 0)
+        if(grid[i][j].state == 0)
         {
           fill(238, 130, 238);
         }
