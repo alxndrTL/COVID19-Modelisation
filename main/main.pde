@@ -2,6 +2,8 @@ int carres_number = 100;
 GridDisplayer gD;
 GridUpdater gU;
 
+Cell[][] grid;
+
 void setup()
 {
   size(800, 800);
@@ -11,11 +13,12 @@ void setup()
   
   gD = new GridDisplayer(new PVector(50, 60), 400, carres_number);
   gU = new GridUpdater();
+  
+  grid = generateInitialGrid(carres_number);
 }
 
 void draw()
 {
-  Cell[][] grid = generateInitialGrid(carres_number);
   grid = gU.update(grid);
   gD.display(grid);
 }
