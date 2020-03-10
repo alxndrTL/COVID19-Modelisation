@@ -29,11 +29,12 @@ void setup() {
   plot.getYAxis().setLineColor(255);
   plot.getYAxis().setLineWidth(3);
   plot.getYAxis().setFontColor(255);
-  plot.getYAxis().setFontName("Caladea");
+  plot.getYAxis().setFontName("cmunrm.ttf");
+  plot.getYAxis().setFontSize(20);
   
   plot.getYAxis().getAxisLabel().setFontColor(255);
   plot.getYAxis().getAxisLabel().setFontSize(40);
-  plot.getYAxis().getAxisLabel().setFontName("Segoe UI");
+  plot.getYAxis().getAxisLabel().setFontName("cmunrm.ttf");
   
   plot.getYAxis().setNTicks(5); //nombre de graduations
   plot.getYAxis().setTickLength(0); // graduations ou pas ?
