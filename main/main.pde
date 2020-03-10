@@ -12,6 +12,8 @@ void setup()
   
   Cell[][] grid = generateInitialGrid(carres_number);
   
+  println(grid.length);
+  
   gD.display(grid);
 }
 

@@ -14,7 +14,6 @@ class GridDisplayer
     num = _num;
     
     stop_point = PVector.add(start_point, new PVector(size, size));
-    print(start_point.x);
   }
   
   void display(Cell[][] grid)
