@@ -1,4 +1,4 @@
-int carres_number = 10;
+int carres_number = 100;
 GridDisplayer gD;
 GridUpdater gU;
 
@@ -11,10 +11,13 @@ void setup()
   noStroke();
   background(0);
   
-  gD = new GridDisplayer(new PVector(50, 60), 400, carres_number);
+  gD = new GridDisplayer(new PVector(0, 0), 400, carres_number);
   gU = new GridUpdater();
   
   grid = generateInitialGrid(carres_number);
+  
+  //gD.display(grid);
+  //grid = gU.update(grid);  
 }
 
 void draw()
