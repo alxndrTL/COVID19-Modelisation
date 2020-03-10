@@ -11,7 +11,7 @@ class GridUpdater
     Cell[][] newGrid = new Cell[num][num];
     for(int i = 0; i < newGrid.length; i++) // TODO : simply copy grid into newGrid
     {
-      for(int j = 0; j < newGrid.length; i++)
+      for(int j = 0; j < newGrid.length; j++)
       {
         newGrid[i][j] = new Cell(0);
       }
