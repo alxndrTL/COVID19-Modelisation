@@ -1,4 +1,4 @@
-int carres_number = 100;
+int carres_number = 10;
 GridDisplayer gD;
 GridUpdater gU;
 
