@@ -14,10 +14,7 @@ void setup()
   gD = new GridDisplayer(new PVector(0, 0), 400, carres_number);
   gU = new GridUpdater();
   
-  grid = generateInitialGrid(carres_number);
-  
-  //gD.display(grid);
-  //grid = gU.update(grid);  
+  grid = generateInitialGrid(carres_number);  
 }
 
 void draw()
