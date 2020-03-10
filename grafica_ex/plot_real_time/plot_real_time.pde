@@ -3,6 +3,7 @@ import grafica.*;
 GPlot plot;
 
 float x = 0;
+float load = 0;
 
 void setup() {
   size(800, 800);
@@ -68,7 +69,7 @@ void setup() {
   
   
   // Add the points
-  plot.setPoints(points);
+  //plot.setPoints(points);
   plot.setPointSize(10);
   plot.setPointColor(255);
   
@@ -123,7 +124,7 @@ void draw()
   plot.endDraw();
   
   x += 1/180.0;
-  println(x);
+  load += random(1)/180.0;
   
-  
+  plot.addPoint(x, load); 
 }
