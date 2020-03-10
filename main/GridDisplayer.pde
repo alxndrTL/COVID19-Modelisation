@@ -25,6 +25,7 @@ class GridDisplayer
         float x = map(i, 0, num, start_point.x, stop_point.x);
         float y = map(j, 0, num, start_point.y, stop_point.y);
       
+        println(i, j);
         if(grid[i][j].state == 0)
         {
           fill(238, 130, 238);

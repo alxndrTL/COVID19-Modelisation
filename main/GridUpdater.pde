@@ -4,10 +4,18 @@ class GridUpdater
   {
   }
   
-  Cell[][] updateGrid(Cell[][] grid)
+  Cell[][] update(Cell[][] grid)
   {
     int num = grid.length;
-    Cell[][] newGrid = new Cell[grid.length][num];
+    
+    Cell[][] newGrid = new Cell[num][num];
+    for(int i = 0; i < newGrid.length; i++) // TODO : simply copy grid into newGrid
+    {
+      for(int j = 0; j < newGrid.length; i++)
+      {
+        newGrid[i][j] = new Cell(0);
+      }
+    }
     
     for(int i = 1; i < num-1; i++)
     {
@@ -19,23 +27,30 @@ class GridUpdater
         {
           if(numAliveNeighbors < 2)
           {
-            grid[i][j].state = 0; // underpopulation
+            newGrid[i][j].state = 0; // underpopulation
           }else if(numAliveNeighbors > 3)
           {
-            grid[i][j].state = 0; // overpopulation
-          }else if(numAliveNeighbors == 3)
+            newGrid[i][j].state = 0; // overpopulation
+          }else if(numAliveNeighbors == 3) // TODO : reunir == 2 et == 3 par un ou
           {
-            grid[i][j].state = 1;
+            newGrid[i][j].state = 1;
           }else if(numAliveNeighbors == 2)
           {
-            grid[i][j].state = 1;
-          }else
+            newGrid[i][j].state = 1;
+          }else // TODO : REMOVE LE ELSE SI TOUT VA BIEN
           {
             println("AILLE AILLE OUILLE...");
           }
+        }else
+        {
+          if(numAliveNeighbors == 3)
+          {
+            newGrid[i][j].state = 1; // reproduction
+          }else {
+            newGrid[i][j].state = 0;
+          }
         }
       }
-      
     }
     
     
@@ -47,7 +62,7 @@ class GridUpdater
   {
     int numAliveNeighbors = 0;
     
-    for(int i = x-1; i < i+2; i++) //put <= i+1 instead, plus joli
+    for(int i = x-1; i < x+2; i++) //put <= i+1 instead, plus joli
     {
       for(int j = y-1; j < y+2; j++)
       {

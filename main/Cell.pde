@@ -1,6 +1,6 @@
 class Cell
 {
-  int state;
+  int state = 0;
   
   Cell(int _state)
   {
