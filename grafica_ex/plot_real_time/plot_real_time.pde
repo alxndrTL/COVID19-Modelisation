@@ -50,6 +50,9 @@ void setup() {
   arrayCopy(ticks, 1, newTicks, 0, newTicks.length);
   plot.getYAxis().setTicks(newTicks);
   
+  //String[] ticksLabels = {"heyy", "bonjour", "bonjour", "bonjour", "bonjour"}; pour set le label des graduations (ie : remplacer chiffres par dates en abcisses)
+  //plot.getYAxis().setTickLabels(ticksLabels);
+  
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   plot.getXAxis().setLineColor(255);
   plot.getXAxis().setLineWidth(3);
