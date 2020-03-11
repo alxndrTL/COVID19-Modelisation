@@ -11,9 +11,9 @@ class GridUpdater
     Cell[][] newGrid = new Cell[num][num];    
     arrayCopy(grid, newGrid);
 
-    for (int i = 1; i < num-1; i++)
+    for (int i = 0; i < num; i++) // 1 num-1
     {
-      for (int j = 1; j < num-1; j++)
+      for (int j = 0; j < num; j++) // 1 num-1
       {
         int numInfectedNeighbors = infectedNeighbors(grid, i, j);
         
@@ -37,17 +37,27 @@ class GridUpdater
   int infectedNeighbors(Cell[][] grid, int row, int col)
     //assume x, y are superior to 0, and inferior to grid.length-1 // TODO : gerer le cas ou x,y = 0 ou x,y = grid.length-1
   {
+    int num = grid.length;
     int numInfectedNeighbors = 0; // -1 to not count the cell itself as a neighbor
 
     for (int i = row-1; i < row+2; i++) //put <= i+1 instead, plus joli
     {
       for (int j = col-1; j < col+2; j++)
       {
-        if (grid[i][j].state == 1)
+        if((i < 0) || (i > num-1))
         {
-          if ((i != row) || (j != col))
+          
+        }else if((j < 0) || (j > num-1))
+        {
+          
+        }else
+        {
+          if (grid[i][j].state == 1)
           {
-            numInfectedNeighbors++;
+            if ((i != row) || (j != col))
+            {
+              numInfectedNeighbors++;
+            }
           }
         }
       }

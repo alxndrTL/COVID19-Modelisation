@@ -21,14 +21,11 @@ void draw()
 {
   grid = gU.update(grid);
   gD.display(grid);
-  println(gU.totalInfected);
 }
 
 Cell[][] generateInitialGrid(int num)
 {
   Cell[][] grid = new Cell[num][num];
-  
-  
   
   for(int i = 0; i < num; i++)
   {
