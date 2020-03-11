@@ -6,21 +6,22 @@ Cell[][] grid;
 
 void setup()
 {
-  size(800, 800);
+  size(1000, 1000);
   
   noStroke();
   background(0);
   
-  gD = new GridDisplayer(new PVector(0, 0), width, carres_number);
+  gD = new GridDisplayer(new PVector(0, 0), 500, carres_number);
   gU = new GridUpdater();
   
-  grid = generateInitialGrid(carres_number);  
+  grid = generateInitialGrid(carres_number);
 }
 
 void draw()
 {
   grid = gU.update(grid);
   gD.display(grid);
+  println(gU.totalInfected);
 }
 
 Cell[][] generateInitialGrid(int num)
@@ -40,6 +41,7 @@ Cell[][] generateInitialGrid(int num)
   int row = round(random(0.25*float(num), 0.75*float(num))); //make sure the starting point in the center of the CA
   int col = round(random(0.25*float(num)/4, 0.75*float(num)));
   grid[row][col].state = 1;
+  gU.totalInfected ++;
   
   return grid;
 }

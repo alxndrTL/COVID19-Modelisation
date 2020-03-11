@@ -1,21 +1,15 @@
 class GridUpdater
 {
-  GridUpdater()
-  {
-  }
+  float totalInfected = 0;
+  
+  GridUpdater() {} // TODO : params ??
 
   Cell[][] update(Cell[][] grid)
   {
     int num = grid.length;
 
-    Cell[][] newGrid = new Cell[num][num];
-    for (int i = 0; i < newGrid.length; i++) // TODO : simply copy grid into newGrid
-    {
-      for (int j = 0; j < newGrid.length; j++)
-      {
-        newGrid[i][j] = new Cell(0);
-      }
-    }
+    Cell[][] newGrid = new Cell[num][num];    
+    arrayCopy(grid, newGrid);
 
     for (int i = 1; i < num-1; i++)
     {
@@ -25,10 +19,11 @@ class GridUpdater
         
         if (grid[i][j].state == 0)
         {
-          float p_infection = min(0.50 * numInfectedNeighbors, 0.2);
+          float p_infection = min(0.10 * numInfectedNeighbors, 1);
           if(random(0, 1) < p_infection)
           {
             newGrid[i][j].state = 1;
+            totalInfected++;
           }
         } else
         {
@@ -39,7 +34,7 @@ class GridUpdater
     return newGrid;
   }
 
-  int infectedNeighbors(Cell[][] grid, int row, int col) //change variables ? x and y look like coordinate, but here these are indices
+  int infectedNeighbors(Cell[][] grid, int row, int col)
     //assume x, y are superior to 0, and inferior to grid.length-1 // TODO : gerer le cas ou x,y = 0 ou x,y = grid.length-1
   {
     int numInfectedNeighbors = 0; // -1 to not count the cell itself as a neighbor
