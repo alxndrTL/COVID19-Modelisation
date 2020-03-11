@@ -50,7 +50,7 @@ class Slider
     
     circle(posx, posy, slider_radius);
     fill(255);
-    text(nameValue + " = " + posx, startingPos.x+size+15, posy+5);
+    text(nameValue + " = " + map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), startingPos.x+size+15, posy+5);
   }
   
   float getValue()

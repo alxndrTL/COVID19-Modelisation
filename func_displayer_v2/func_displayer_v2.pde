@@ -20,4 +20,23 @@ void draw()
   slider_x0.display();
 }
 
-//TODO : moussePressed, mais attention si il ya plusieurs sliders !! la bise
+void mousePressed()
+{
+  slider_N.mousePressed_class(mouseX);
+  slider_k.mousePressed_class(mouseX);
+  slider_x0.mousePressed_class(mouseX);
+}
+  
+void mouseDragged()
+{
+  slider_N.mouseDragged_class(mouseX);
+  slider_k.mouseDragged_class(mouseX);
+  slider_x0.mouseDragged_class(mouseX);
+}
+
+void mouseReleased()
+{
+   slider_N.mouseReleased_class();
+   slider_k.mouseReleased_class();
+   slider_x0.mouseReleased_class();
+}
