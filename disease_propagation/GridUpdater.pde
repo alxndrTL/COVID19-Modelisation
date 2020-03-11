@@ -28,6 +28,17 @@ class GridUpdater
         } else
         {
           
+          if(random(0, 1) < 0.001)
+          {
+            int random_row = round(random(0, num-1));
+            int random_col = round(random(0, num-1));
+            if(newGrid[random_row][random_col].state == 0)
+            {
+              newGrid[random_row][random_col].state = 1;
+              totalInfected++;
+            } 
+          }
+          
         }
       }
     }
