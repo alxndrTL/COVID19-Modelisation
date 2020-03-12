@@ -91,6 +91,7 @@ void draw()
   {
     grid = gU.update(grid);
     plot.addPoint(time, gU.totalInfected);
+    plot.setXLim(0, time);
   }
   
   gD.display(grid);
@@ -104,7 +105,9 @@ void draw()
   //plot.drawLines();
   plot.endDraw();
   
-  time++;
+  time++; /// time = min()
+  
+  plot.setYLim(0, gU.totalInfected);
   if(gU.totalInfected >= carres_number*carres_number)
   {
     finished = true;
