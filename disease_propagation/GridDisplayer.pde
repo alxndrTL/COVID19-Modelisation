@@ -27,11 +27,14 @@ class GridDisplayer
         
         if(grid[i][j].state == 0)
         {
-          fill(238, 130, 238); //violet
+          fill(255); // sain : blanc
         }
         else if(grid[i][j].state == 1)
         {
-          fill(100, 150, 160); //bleu
+          fill(255, 0, 0); // infecte : rouge
+        }else if(grid[i][j].state == 2)
+        {
+          fill(0, 255, 0); // gueri : vert
         }else
         {
           fill(255);

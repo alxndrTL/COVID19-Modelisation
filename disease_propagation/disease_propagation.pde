@@ -12,11 +12,12 @@ boolean finished = false;
 boolean logscale = false;
 float minLim = 0;
 
-GPlot plot;
+GPlot plot_NTotalinfectes;
+GPlot plot_NCurrentinfectes;
 
 void setup()
 {
-  size(1000, 1000);
+  size(2000, 1000);
   
   noStroke();
   background(0);
@@ -26,58 +27,58 @@ void setup()
   
   grid = generateInitialGrid(carres_number);
   
-  plot = new GPlot(this);
-  plot.setPos(25, 500);
-  plot.setDim(600, 400);
+  plot_NTotalinfectes = new GPlot(this);
+  plot_NTotalinfectes.setPos(25, 500);
+  plot_NTotalinfectes.setDim(600, 400);
 
   // Set the plot title and the axis labels
-  plot.getXAxis().setAxisLabelText("temps");
-  plot.getYAxis().setAxisLabelText("infectes");
+  plot_NTotalinfectes.getXAxis().setAxisLabelText("temps");
+  plot_NTotalinfectes.getYAxis().setAxisLabelText("infectes");
   
   //plot.getYAxis().setOffset(-5);
-  plot.getYAxis().setLineColor(255);
-  plot.getYAxis().setLineWidth(3);
-  plot.getYAxis().setFontColor(255);
-  plot.getYAxis().setFontName("cmunrm.ttf");
-  plot.getYAxis().setFontSize(20);
+  plot_NTotalinfectes.getYAxis().setLineColor(255);
+  plot_NTotalinfectes.getYAxis().setLineWidth(3);
+  plot_NTotalinfectes.getYAxis().setFontColor(255);
+  plot_NTotalinfectes.getYAxis().setFontName("cmunrm.ttf");
+  plot_NTotalinfectes.getYAxis().setFontSize(20);
   
-  plot.getYAxis().getAxisLabel().setFontColor(255);
-  plot.getYAxis().getAxisLabel().setFontSize(40);
-  plot.getYAxis().getAxisLabel().setFontName("cmunrm.ttf");
+  plot_NTotalinfectes.getYAxis().getAxisLabel().setFontColor(255);
+  plot_NTotalinfectes.getYAxis().getAxisLabel().setFontSize(40);
+  plot_NTotalinfectes.getYAxis().getAxisLabel().setFontName("cmunrm.ttf");
   
-  plot.getYAxis().setNTicks(5); //nombre de graduations
-  plot.getYAxis().setTickLength(0); // graduations (traits) ou pas ?
-  plot.getYAxis().setRotateTickLabels(false); // rotate les graduations ?
-  plot.getYAxis().setTickLabelOffset(7); //distance graduations de l'axis
+  plot_NTotalinfectes.getYAxis().setNTicks(5); //nombre de graduations
+  plot_NTotalinfectes.getYAxis().setTickLength(0); // graduations (traits) ou pas ?
+  plot_NTotalinfectes.getYAxis().setRotateTickLabels(false); // rotate les graduations ?
+  plot_NTotalinfectes.getYAxis().setTickLabelOffset(7); //distance graduations de l'axis
   
-  plot.getXAxis().setLineColor(255);
-  plot.getXAxis().setLineWidth(3);
-  plot.getXAxis().setFontColor(255);
-  plot.getXAxis().setFontName("cmunrm.ttf");
-  plot.getXAxis().setFontSize(20);
+  plot_NTotalinfectes.getXAxis().setLineColor(255);
+  plot_NTotalinfectes.getXAxis().setLineWidth(3);
+  plot_NTotalinfectes.getXAxis().setFontColor(255);
+  plot_NTotalinfectes.getXAxis().setFontName("cmunrm.ttf");
+  plot_NTotalinfectes.getXAxis().setFontSize(20);
   
-  plot.getXAxis().getAxisLabel().setFontColor(255);
-  plot.getXAxis().getAxisLabel().setFontSize(40);
-  plot.getXAxis().getAxisLabel().setFontName("cmunrm.ttf");
+  plot_NTotalinfectes.getXAxis().getAxisLabel().setFontColor(255);
+  plot_NTotalinfectes.getXAxis().getAxisLabel().setFontSize(40);
+  plot_NTotalinfectes.getXAxis().getAxisLabel().setFontName("cmunrm.ttf");
   
-  plot.getXAxis().setNTicks(5); //nombre de graduations
-  plot.getXAxis().setTickLength(0); // graduations (traits) ou pas ?
-  plot.getXAxis().setRotateTickLabels(false); // rotate les graduations ?
-  plot.getXAxis().setTickLabelOffset(7); //distance graduations de l'axis
+  plot_NTotalinfectes.getXAxis().setNTicks(5); //nombre de graduations
+  plot_NTotalinfectes.getXAxis().setTickLength(0); // graduations (traits) ou pas ?
+  plot_NTotalinfectes.getXAxis().setRotateTickLabels(false); // rotate les graduations ?
+  plot_NTotalinfectes.getXAxis().setTickLabelOffset(7); //distance graduations de l'axis
   
-  plot.setPointSize(10);
-  plot.setPointColor(255);
+  plot_NTotalinfectes.setPointSize(10);
+  plot_NTotalinfectes.setPointColor(255);
   
-  plot.setLineColor(255);
-  plot.setLineWidth(3);
+  plot_NTotalinfectes.setLineColor(255);
+  plot_NTotalinfectes.setLineWidth(3);
   
-  plot.beginDraw();
-  plot.setAxesOffset(0);
-  plot.drawXAxis();
-  plot.drawYAxis();
-  plot.drawPoints();
-  plot.drawLines();
-  plot.endDraw();
+  plot_NTotalinfectes.beginDraw();
+  plot_NTotalinfectes.setAxesOffset(0);
+  plot_NTotalinfectes.drawXAxis();
+  plot_NTotalinfectes.drawYAxis();
+  plot_NTotalinfectes.drawPoints();
+  plot_NTotalinfectes.drawLines();
+  plot_NTotalinfectes.endDraw();
 }
 
 void draw()
@@ -95,23 +96,23 @@ void draw()
   if(!finished)
   {
     grid = gU.update(grid);
-    plot.addPoint(time, gU.totalInfected);
-    plot.setXLim(minLim, time);
+    plot_NTotalinfectes.addPoint(time, gU.totalInfected);
+    plot_NTotalinfectes.setXLim(minLim, time);
   }
   
   gD.display(grid);
   
-  plot.beginDraw();
-  plot.setAxesOffset(0);
-  plot.drawXAxis();
-  plot.drawYAxis();
-  plot.drawPoints();
-  plot.drawLines();
-  plot.endDraw();
+  plot_NTotalinfectes.beginDraw();
+  plot_NTotalinfectes.setAxesOffset(0);
+  plot_NTotalinfectes.drawXAxis();
+  plot_NTotalinfectes.drawYAxis();
+  plot_NTotalinfectes.drawPoints();
+  plot_NTotalinfectes.drawLines();
+  plot_NTotalinfectes.endDraw();
   
   time++;
   
-  plot.setYLim(minLim, gU.totalInfected);
+  plot_NTotalinfectes.setYLim(minLim, gU.totalInfected);
   if(gU.totalInfected >= carres_number*carres_number)
   {
     finished = true;
@@ -133,7 +134,9 @@ Cell[][] generateInitialGrid(int num)
   int row = round(random(0.25*float(num), 0.75*float(num))); //make sure the starting point is in the center of the CA
   int col = round(random(0.25*float(num)/4, 0.75*float(num)));
   grid[row][col].state = 1;
+  gU.currentInfected++;
   gU.totalInfected ++;
+  
   
   return grid;
 }
@@ -143,11 +146,11 @@ void mouseClicked()
   logscale = !logscale;
   
   if (logscale) {
-    plot.setLogScale("y");
-    plot.getYAxis().setAxisLabelText("log(infectes)");
+    plot_NTotalinfectes.setLogScale("y");
+    plot_NTotalinfectes.getYAxis().setAxisLabelText("log(infectes)");
   }
   else {
-    plot.setLogScale("");
-    plot.getYAxis().setAxisLabelText("infectes");
+    plot_NTotalinfectes.setLogScale("");
+    plot_NTotalinfectes.getYAxis().setAxisLabelText("infectes");
   }
 }

@@ -1,5 +1,6 @@
 class GridUpdater
 {
+  float currentInfected = 0;
   float totalInfected = 0;
   
   GridUpdater() {} // TODO : params ??
@@ -23,18 +24,24 @@ class GridUpdater
           if(random(0, 1) < p_infection)
           {
             newGrid[i][j].state = 1;
+            currentInfected++;
             totalInfected++;
           }
         } else
         {
-          
-          
+          //guerison avec une certaine prob
+          if(random(0, 1) < 0.01)
+          {
+            newGrid[i][j].state = 2;
+            currentInfected--;
+          }
           
         }
       }
     }
     
-    if(random(0, 1) < 0.01 + (1/(totalInfected))) //déplacement
+    //if(random(0, 1) < 0.01 + (1/(totalInfected))) //déplacement
+    if(random(0, 1) < 0.5)
     {
       int random_row = round(random(0, num-1));
       int random_col = round(random(0, num-1));
