@@ -3,6 +3,8 @@ class GridUpdater
   float currentInfected = 0;
   float totalInfected = 0;
   
+  float maxCurrentInfected = 0;
+  
   GridUpdater() {} // TODO : params ??
 
   Cell[][] update(Cell[][] grid)
@@ -16,7 +18,7 @@ class GridUpdater
     {
       for (int j = 0; j < num; j++)
       {
-        if (grid[i][j].state == 0)
+        if(grid[i][j].state == 0)
         {
           int numInfectedNeighbors = infectedNeighbors(grid, i, j);
           float p_infection = min(0.10 * numInfectedNeighbors, 1);
@@ -27,7 +29,7 @@ class GridUpdater
             currentInfected++;
             totalInfected++;
           }
-        } else
+        } else if(grid[i][j].state == 1)
         {
           //guerison avec une certaine prob
           if(random(0, 1) < 0.01)
@@ -49,9 +51,12 @@ class GridUpdater
       if(newGrid[random_row][random_col].state == 0)
       {
         newGrid[random_row][random_col].state = 1;
+        currentInfected++;
         totalInfected++;
       } 
     }
+    
+    maxCurrentInfected = max(maxCurrentInfected, currentInfected);
     
     return newGrid;
   }
