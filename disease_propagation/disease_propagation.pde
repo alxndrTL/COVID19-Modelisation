@@ -7,7 +7,10 @@ GridUpdater gU;
 Cell[][] grid;
 
 int time = 0;
-boolean finished = false; 
+boolean finished = false;
+
+boolean logscale = false;
+float minLim = 0;
 
 GPlot plot;
 
@@ -24,16 +27,12 @@ void setup()
   grid = generateInitialGrid(carres_number);
   
   plot = new GPlot(this);
-  plot.setPos(25, 500); //550
+  plot.setPos(25, 500);
   plot.setDim(600, 400);
-  
-  //plot.setXLim(0, 100);
-  //plot.setYLim(0, 50);
 
   // Set the plot title and the axis labels
-  plot.setTitleText("A very simple example");
-  plot.getXAxis().setAxisLabelText("x axis");
-  plot.getYAxis().setAxisLabelText("y axis");
+  plot.getXAxis().setAxisLabelText("temps");
+  plot.getYAxis().setAxisLabelText("infectes");
   
   //plot.getYAxis().setOffset(-5);
   plot.getYAxis().setLineColor(255);
@@ -47,7 +46,7 @@ void setup()
   plot.getYAxis().getAxisLabel().setFontName("cmunrm.ttf");
   
   plot.getYAxis().setNTicks(5); //nombre de graduations
-  plot.getYAxis().setTickLength(0); // graduations ou pas ?
+  plot.getYAxis().setTickLength(0); // graduations (traits) ou pas ?
   plot.getYAxis().setRotateTickLabels(false); // rotate les graduations ?
   plot.getYAxis().setTickLabelOffset(7); //distance graduations de l'axis
   
@@ -62,11 +61,10 @@ void setup()
   plot.getXAxis().getAxisLabel().setFontName("cmunrm.ttf");
   
   plot.getXAxis().setNTicks(5); //nombre de graduations
-  plot.getXAxis().setTickLength(0); // graduations ou pas ?
+  plot.getXAxis().setTickLength(0); // graduations (traits) ou pas ?
   plot.getXAxis().setRotateTickLabels(false); // rotate les graduations ?
   plot.getXAxis().setTickLabelOffset(7); //distance graduations de l'axis
   
-  // Add the points
   plot.setPointSize(10);
   plot.setPointColor(255);
   
@@ -77,7 +75,6 @@ void setup()
   plot.setAxesOffset(0);
   plot.drawXAxis();
   plot.drawYAxis();
-  plot.drawTitle();
   plot.drawPoints();
   plot.drawLines();
   plot.endDraw();
@@ -87,11 +84,19 @@ void draw()
 {
   background(0);
   
+  if(logscale)
+  {
+    minLim = 0.01;
+  }else
+  {
+    minLim = 0;
+  }
+  
   if(!finished)
   {
     grid = gU.update(grid);
     plot.addPoint(time, gU.totalInfected);
-    plot.setXLim(0, time);
+    plot.setXLim(minLim, time);
   }
   
   gD.display(grid);
@@ -100,14 +105,13 @@ void draw()
   plot.setAxesOffset(0);
   plot.drawXAxis();
   plot.drawYAxis();
-  plot.drawTitle();
   plot.drawPoints();
-  //plot.drawLines();
+  plot.drawLines();
   plot.endDraw();
   
-  time++; /// time = min()
+  time++;
   
-  plot.setYLim(0, gU.totalInfected);
+  plot.setYLim(minLim, gU.totalInfected);
   if(gU.totalInfected >= carres_number*carres_number)
   {
     finished = true;
@@ -126,10 +130,24 @@ Cell[][] generateInitialGrid(int num)
     }
   }
   
-  int row = round(random(0.25*float(num), 0.75*float(num))); //make sure the starting point in the center of the CA
+  int row = round(random(0.25*float(num), 0.75*float(num))); //make sure the starting point is in the center of the CA
   int col = round(random(0.25*float(num)/4, 0.75*float(num)));
   grid[row][col].state = 1;
   gU.totalInfected ++;
   
   return grid;
+}
+
+void mouseClicked()
+{
+  logscale = !logscale;
+  
+  if (logscale) {
+    plot.setLogScale("y");
+    plot.getYAxis().setAxisLabelText("log(infectes)");
+  }
+  else {
+    plot.setLogScale("");
+    plot.getYAxis().setAxisLabelText("infectes");
+  }
 }
