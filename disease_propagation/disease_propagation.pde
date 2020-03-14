@@ -114,5 +114,5 @@ void mouseDragged()
 void mouseReleased()
 {
    tauxVoyageSlider.mouseReleased_class();
-   tauxGuerisonSlider.mouseDragged_class(mouseX);
+   tauxGuerisonSlider.mouseReleased_class();
 }
