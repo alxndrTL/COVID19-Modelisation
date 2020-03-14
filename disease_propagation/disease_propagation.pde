@@ -15,6 +15,10 @@ float minLim = 0;
 Plot plot_NTotalInfectes;
 Plot plot_NCurrentInfectes;
 
+Slider tauxVoyageSlider;
+Slider tauxGuerisonSlider;
+Slider contagiositeSlider;
+
 void setup()
 {
   size(2000, 1000);
@@ -29,11 +33,15 @@ void setup()
   
   plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
   plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant"); 
+  
+  tauxVoyageSlider = new Slider(new PVector(600, 100), 200, 50, 0, 1, "taux de voyage", 25);
 }
 
 void draw()
 {
   background(0);
+  
+  tauxVoyageSlider.display();
   
   if(logscale)
   {
@@ -88,4 +96,19 @@ Cell[][] generateInitialGrid(int num)
   
   
   return grid;
+}
+
+void mousePressed()
+{
+  tauxVoyageSlider.mousePressed_class(mouseX);
+}
+  
+void mouseDragged()
+{
+  tauxVoyageSlider.mouseDragged_class(mouseX);
+}
+
+void mouseReleased()
+{
+   tauxVoyageSlider.mouseReleased_class();
 }
