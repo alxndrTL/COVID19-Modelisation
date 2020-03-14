@@ -34,7 +34,8 @@ void setup()
   plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
   plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant"); 
   
-  tauxVoyageSlider = new Slider(new PVector(600, 100), 200, 50, 0, 1, "taux de voyage", 25);
+  tauxVoyageSlider = new Slider(new PVector(530, 100), 200, 30, 0, 1, "taux de voyage", 25);
+  tauxGuerisonSlider = new Slider(new PVector(530, 150), 200, 30, 0, 1, "taux de guérison", 25);
 }
 
 void draw()
@@ -42,6 +43,7 @@ void draw()
   background(0);
   
   tauxVoyageSlider.display();
+  tauxGuerisonSlider.display();
   
   if(logscale)
   {
@@ -94,21 +96,23 @@ Cell[][] generateInitialGrid(int num)
   gU.currentInfected++;
   gU.totalInfected ++;
   
-  
   return grid;
 }
 
 void mousePressed()
 {
   tauxVoyageSlider.mousePressed_class(mouseX);
+  tauxGuerisonSlider.mousePressed_class(mouseX);
 }
   
 void mouseDragged()
 {
   tauxVoyageSlider.mouseDragged_class(mouseX);
+  tauxGuerisonSlider.mouseDragged_class(mouseX);
 }
 
 void mouseReleased()
 {
    tauxVoyageSlider.mouseReleased_class();
+   tauxGuerisonSlider.mouseDragged_class(mouseX);
 }

@@ -18,6 +18,8 @@ class GridDisplayer
   
   void display(Cell[][] grid)
   {
+    noStroke();
+    
     for(int i = 0; i < num; i++)
     {
       for(int j = 0; j < num; j++)

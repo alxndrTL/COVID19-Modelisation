@@ -33,6 +33,8 @@ class Slider
   
   void display()
   {
+    strokeWeight(5);
+    stroke(255);
     line(startingPos.x, posy, startingPos.x+size, posy);
     
     if (dist(mouseX, mouseY, posx, posy) < slider_radius) //overlay
@@ -50,7 +52,7 @@ class Slider
     
     circle(posx, posy, slider_radius);
     fill(255);
-    text(nameValue + " = " + map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), startingPos.x+size+15, posy+5);
+    text(nameValue + " = " + map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), startingPos.x+size+20, posy+5);
   }
   
   float getValue()
