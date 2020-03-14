@@ -1,5 +1,9 @@
 class GridUpdater
 {
+  float contagiosite = 0.1;
+  float tauxVoyage = 0.5;
+  float tauxGuerison = 0.01;
+  
   float currentInfected = 0;
   float totalInfected = 0;
   
@@ -21,7 +25,7 @@ class GridUpdater
         if(grid[i][j].state == 0)
         {
           int numInfectedNeighbors = infectedNeighbors(grid, i, j);
-          float p_infection = min(0.10 * numInfectedNeighbors, 1);
+          float p_infection = min(contagiosite * numInfectedNeighbors, 1);
           
           if(random(0, 1) < p_infection)
           {
@@ -32,7 +36,7 @@ class GridUpdater
         } else if(grid[i][j].state == 1)
         {
           //guerison avec une certaine prob
-          if(random(0, 1) < 0.01)
+          if(random(0, 1) < tauxGuerison)
           {
             newGrid[i][j].state = 2;
             currentInfected--;
@@ -43,7 +47,7 @@ class GridUpdater
     }
     
     //if(random(0, 1) < 0.01 + (1/(totalInfected))) //déplacement
-    if(random(0, 1) < 0.5)
+    if(random(0, 1) < tauxVoyage)
     {
       int random_row = round(random(0, num-1));
       int random_col = round(random(0, num-1));
@@ -59,6 +63,13 @@ class GridUpdater
     maxCurrentInfected = max(maxCurrentInfected, currentInfected);
     
     return newGrid;
+  }
+  
+  void updateParams(float newContagiosite, float newTauxGuerison, float newTauxVoyage)
+  {
+    contagiosite = newContagiosite;
+    tauxVoyage = newTauxVoyage;
+    tauxGuerison = newTauxGuerison;
   }
 
   int infectedNeighbors(Cell[][] grid, int row, int col)

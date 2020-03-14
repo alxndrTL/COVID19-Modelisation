@@ -15,9 +15,9 @@ float minLim = 0;
 Plot plot_NTotalInfectes;
 Plot plot_NCurrentInfectes;
 
-Slider tauxVoyageSlider;
-Slider tauxGuerisonSlider;
 Slider contagiositeSlider;
+Slider tauxGuerisonSlider;
+Slider tauxVoyageSlider;
 
 void setup()
 {
@@ -34,16 +34,22 @@ void setup()
   plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
   plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant"); 
   
-  tauxVoyageSlider = new Slider(new PVector(530, 100), 200, 30, 0, 1, "taux de voyage", 25);
-  tauxGuerisonSlider = new Slider(new PVector(530, 150), 200, 30, 0, 1, "taux de guérison", 25);
+  contagiositeSlider = new Slider(new PVector(530, 100), 200, 30, 0, 0.3, "contagiosité", 25);
+  tauxGuerisonSlider = new Slider(new PVector(530, 150), 200, 30, 0, 0.5, "taux de guérison", 25);
+  tauxVoyageSlider = new Slider(new PVector(530, 200), 200, 30, 0, 1, "taux de voyage", 25);
+  
+  contagiositeSlider.setValue(0.1);
+  tauxGuerisonSlider.setValue(0.01);
+  tauxVoyageSlider.setValue(0.5);
 }
 
 void draw()
 {
   background(0);
   
-  tauxVoyageSlider.display();
+  contagiositeSlider.display();
   tauxGuerisonSlider.display();
+  tauxVoyageSlider.display();
   
   if(logscale)
   {
@@ -55,6 +61,7 @@ void draw()
   
   if(!finished)
   {
+    gU.updateParams(contagiositeSlider.getValue(), tauxGuerisonSlider.getValue(), tauxVoyageSlider.getValue());
     grid = gU.update(grid);
     plot_NTotalInfectes.addPoint(time, gU.totalInfected);
     plot_NTotalInfectes.setXLim(minLim, time);
@@ -101,18 +108,21 @@ Cell[][] generateInitialGrid(int num)
 
 void mousePressed()
 {
-  tauxVoyageSlider.mousePressed_class(mouseX);
+  contagiositeSlider.mousePressed_class(mouseX);
   tauxGuerisonSlider.mousePressed_class(mouseX);
+  tauxVoyageSlider.mousePressed_class(mouseX);
 }
   
 void mouseDragged()
 {
-  tauxVoyageSlider.mouseDragged_class(mouseX);
+  contagiositeSlider.mouseDragged_class(mouseX);
   tauxGuerisonSlider.mouseDragged_class(mouseX);
+  tauxVoyageSlider.mouseDragged_class(mouseX);  
 }
 
 void mouseReleased()
 {
-   tauxVoyageSlider.mouseReleased_class();
-   tauxGuerisonSlider.mouseReleased_class();
+  contagiositeSlider.mouseReleased_class();
+  tauxGuerisonSlider.mouseReleased_class();
+   tauxVoyageSlider.mouseReleased_class();   
 }

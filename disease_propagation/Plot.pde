@@ -46,9 +46,11 @@ class Plot
     plot.getXAxis().setTickLabelOffset(7); //distance graduations de l'axis
     
     plot.setPointSize(10);
-    plot.setPointColor(255);
+    //plot.setPointColor(255);
+    plot.setPointColor(color(255, 9, 50)); // 255 9 50
     
-    plot.setLineColor(255);
+    //plot.setLineColor(255);
+    plot.setLineColor(color(255, 9, 50));
     plot.setLineWidth(3);
   }
   

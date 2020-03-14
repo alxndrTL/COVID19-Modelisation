@@ -24,7 +24,7 @@ class Slider
     nameValue = _nameValue;
     nameSize = _nameSize;
     
-    posx = (startingPos.x + startingPos.x + size)/2;
+    posx = 0.8;//defaultValue;
     posy = startingPos.y;
     
     PFont cmuFont = createFont("cmunrm.ttf", nameSize);
@@ -50,9 +50,16 @@ class Slider
     posx = max(posx, startingPos.x);
     posx = min(posx, startingPos.x+size);
     
+    fill(255, 9, 50);
     circle(posx, posy, slider_radius);
     fill(255);
     text(nameValue + " = " + map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), startingPos.x+size+20, posy+5);
+  }
+  
+  void setValue(float newValue)
+  {
+    // expects newValue to be in the range specified in the constructor.
+    posx = map(newValue, minValue, maxValue, startingPos.x, startingPos.x+size);
   }
   
   float getValue()
