@@ -10,7 +10,7 @@ class Plot
     plot.setPos(pos.x, pos.y);
     plot.setDim(1200, 400);
     
-    plot.setXLim(0, 52);
+    plot.setXLim(0, 52); // 52 pour la Chine, 19 pour la France
   
     // Set the plot title and the axis labels
     plot.getXAxis().setAxisLabelText(xLabel);

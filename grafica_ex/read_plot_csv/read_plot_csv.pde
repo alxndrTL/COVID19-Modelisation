@@ -35,7 +35,8 @@ void setup()
   GPointsArray points = new GPointsArray(xTicksLabels.length);
   GPointsArray gr_points = new GPointsArray(xTicksLabels.length);
   
-  for (int i = 0; i < xTicksLabels.length; i++) {
+  for (int i = 0; i < xTicksLabels.length; i++)
+  {
     points.add(i, y_infected[i]);
     gr_points.add(i, y_growthfactor[i]);
   }
