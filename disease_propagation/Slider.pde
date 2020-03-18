@@ -53,7 +53,7 @@ class Slider
     fill(255, 9, 50);
     circle(posx, posy, slider_radius);
     fill(255);
-    text(nameValue + " = " + map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), startingPos.x+size+20, posy+5);
+    text(nameValue + " = " + nf(map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), 1, 2), startingPos.x+size+20, posy+5);
   }
   
   void setValue(float newValue)

@@ -4,10 +4,10 @@ class GridUpdater
   float tauxVoyage = 0.5;
   float tauxGuerison = 0.01;
   
-  float currentInfected = 0;
-  float totalInfected = 0;
+  int currentInfected = 0;
+  int totalInfected = 0;
   
-  float maxCurrentInfected = 0;
+  int maxCurrentInfected = 0;
   
   float txCroissance = 0;
   
@@ -15,8 +15,8 @@ class GridUpdater
 
   Cell[][] update(Cell[][] grid)
   {
-    float oldTotalInfected = totalInfected;
-    float oldCurrentInfected = currentInfected;
+    int oldTotalInfected = totalInfected;
+    int oldCurrentInfected = currentInfected;
     
     int num = grid.length;
 
@@ -67,7 +67,7 @@ class GridUpdater
     
     maxCurrentInfected = max(maxCurrentInfected, currentInfected);
     
-    txCroissance = totalInfected/oldTotalInfected;
+    txCroissance = float(totalInfected)/float(oldTotalInfected);
     
     //println("NEW INFECTED:", totalInfected-oldTotalInfected, "NPE:", oldCurrentInfected * contagiosite * 8 * ((10000-totalInfected)/10000));
     
