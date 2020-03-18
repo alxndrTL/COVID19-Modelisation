@@ -3,7 +3,7 @@ import grafica.*;
 Plot plot;
 Plot plot_gr;
 
-int grad_spacing = 1; //3 pour Chine, 1 pour France
+int grad_spacing = 3; //3 pour Chine, 1 pour France
 
 int draws_counter = 0;
 
@@ -18,7 +18,7 @@ void setup()
   background(0);
   frameRate(10);
   
-  Table table = loadTable("france_16.csv", "header");
+  Table table = loadTable("chine_16.csv", "header");
   table.setColumnType("Date", Table.STRING);
   table.setColumnType("Infectes", Table.INT);  
   
@@ -61,7 +61,7 @@ void setup()
   
   plot = new Plot(this, new PVector(50, 10), "temps", "infectés", rowNumber, xTicksLabels.length);
   plot.plot.getXAxis().setTickLabels(xTicksLabels);
-  plot.setYLim(0, 6000); //84000 pour la Chine, 6000 pour la France
+  plot.setYLim(0, 84000); //84000 pour la Chine, 6000 pour la France
   
   //plot.plot.setPoints(points);
   //plot.display();

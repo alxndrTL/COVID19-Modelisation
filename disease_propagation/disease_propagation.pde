@@ -1,6 +1,6 @@
 import grafica.*;
 
-int carres_number = 500;
+int carres_number = 100;
 GridDisplayer gD;
 GridUpdater gU;
 
@@ -14,6 +14,7 @@ float minLim = 0;
 
 Plot plot_NTotalInfectes;
 Plot plot_NCurrentInfectes;
+Plot plot_TxCroissance;
 
 Slider contagiositeSlider;
 Slider tauxGuerisonSlider;
@@ -21,7 +22,8 @@ Slider tauxVoyageSlider;
 
 void setup()
 {
-  size(2000, 1000);
+  //fullScreen();
+  size(2500, 1200);
   
   noStroke();
   background(0);
@@ -32,13 +34,16 @@ void setup()
   grid = generateInitialGrid(carres_number);
   
   plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
-  plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant"); 
+  plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant");
+  plot_TxCroissance = new Plot(this, new PVector(1575, 500), "temps", "croissance");
+  
+  plot_TxCroissance.setYLim(1, 1.5);
   
   contagiositeSlider = new Slider(new PVector(530, 100), 200, 30, 0, 0.3, "contagiosité", 25);
   tauxGuerisonSlider = new Slider(new PVector(530, 150), 200, 30, 0, 0.5, "taux de guérison", 25);
   tauxVoyageSlider = new Slider(new PVector(530, 200), 200, 30, 0, 1, "taux de voyage", 25);
   
-  contagiositeSlider.setValue(0.1);
+  contagiositeSlider.setValue(0.01);
   tauxGuerisonSlider.setValue(0.01);
   tauxVoyageSlider.setValue(0.5);
 }
@@ -68,12 +73,16 @@ void draw()
     
     plot_NCurrentInfectes.addPoint(time, gU.currentInfected);
     plot_NCurrentInfectes.setXLim(minLim, time);
+    
+    plot_TxCroissance.addPoint(time, gU.txCroissance);
+    plot_TxCroissance.setXLim(minLim, time);
   }
   
   gD.display(grid);
   
   plot_NTotalInfectes.display();
   plot_NCurrentInfectes.display();
+  plot_TxCroissance.display();
   
   time++;
   

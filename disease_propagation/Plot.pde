@@ -45,7 +45,7 @@ class Plot
     plot.getXAxis().setRotateTickLabels(false); // rotate les graduations ?
     plot.getXAxis().setTickLabelOffset(7); //distance graduations de l'axis
     
-    plot.setPointSize(10);
+    plot.setPointSize(5);
     plot.setPointColor(255);
     
     plot.setLineColor(255);
