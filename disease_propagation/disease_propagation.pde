@@ -22,8 +22,8 @@ Slider tauxVoyageSlider;
 
 void setup()
 {
-  //fullScreen();
-  size(2500, 1200);
+  fullScreen();
+  //size(2500, 1200);
   
   noStroke();
   background(0);

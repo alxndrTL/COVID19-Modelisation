@@ -93,5 +93,4 @@ class Plot
   {
     plot.getYAxis().setAxisLabelText(label);
   }
-  
 }
