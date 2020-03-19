@@ -18,14 +18,16 @@ class GridUpdater
     int oldTotalInfected = totalInfected;
     int oldCurrentInfected = currentInfected;
     
-    int num = grid.length;
+    //int num = grid.length;
+    int width_num = grid[0].length;
+    int height_num = grid.length;
 
-    Cell[][] newGrid = new Cell[num][num];    
+    Cell[][] newGrid = new Cell[height_num][width_num];    
     arrayCopy(grid, newGrid);
 
-    for (int i = 0; i < num; i++)
+    for (int i = 0; i < height_num; i++)
     {
-      for (int j = 0; j < num; j++)
+      for (int j = 0; j < width_num; j++)
       {
         if(grid[i][j].state == 0)
         {
@@ -54,8 +56,8 @@ class GridUpdater
     //if(random(0, 1) < 0.01 + (1/(totalInfected))) //déplacement
     if(random(0, 1) < tauxVoyage)
     {
-      int random_row = round(random(0, num-1));
-      int random_col = round(random(0, num-1));
+      int random_row = round(random(0, height_num-1));
+      int random_col = round(random(0, width_num-1));
       
       if(newGrid[random_row][random_col].state == 0)
       {
@@ -83,14 +85,17 @@ class GridUpdater
 
   int infectedNeighbors(Cell[][] grid, int row, int col)
   {
-    int num = grid.length;
+    //int num = grid.length;
+    int width_num = grid[0].length;
+    int height_num = grid.length;
+    
     int numInfectedNeighbors = 0;
 
     for (int i = row-1; i <= row+1; i++)
     {
       for (int j = col-1; j <= col+1; j++)
       {        
-        if(((i >= 0) && (i <= num-1)) && ((j >= 0) && (j <= num-1)))
+        if(((i >= 0) && (i <= height_num-1)) && ((j >= 0) && (j <= width_num-1)))
         {
           if (grid[i][j].state == 1)
           {

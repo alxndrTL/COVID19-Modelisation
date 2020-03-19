@@ -1,6 +1,8 @@
 import grafica.*;
 
-int carres_number = 100;
+int width_num = 960; //460
+int height_num = 250; //125
+
 GridDisplayer gD;
 GridUpdater gU;
 
@@ -28,10 +30,10 @@ void setup()
   noStroke();
   background(0);
   
-  gD = new GridDisplayer(new PVector(0, 0), 500, carres_number);
+  gD = new GridDisplayer(new PVector(0, 0), 3840, 1000, width_num, height_num);
   gU = new GridUpdater();
   
-  grid = generateInitialGrid(carres_number);
+  grid = generateInitialGrid(width_num, height_num);
   
   plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
   plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant");
@@ -39,9 +41,9 @@ void setup()
   
   plot_TxCroissance.setYLim(1, 1.5);
   
-  contagiositeSlider = new Slider(new PVector(530, 100), 200, 30, 0, 0.3, "contagiosité", 25);
-  tauxGuerisonSlider = new Slider(new PVector(530, 150), 200, 30, 0, 0.5, "taux de guérison", 25);
-  tauxVoyageSlider = new Slider(new PVector(530, 200), 200, 30, 0, 1, "taux de voyage", 25);
+  contagiositeSlider = new Slider(new PVector(width/2 - 300, 1100), 400, 30, 0, 0.3, "contagiosité", 25);
+  tauxGuerisonSlider = new Slider(new PVector(width/2 - 300, 1150), 400, 30, 0, 0.5, "taux de guérison", 25);
+  tauxVoyageSlider = new Slider(new PVector(width/2 - 300, 1200), 400, 30, 0, 1, "taux de voyage", 25);
   
   contagiositeSlider.setValue(0.01);
   tauxGuerisonSlider.setValue(0.01);
@@ -88,26 +90,28 @@ void draw()
   
   plot_NTotalInfectes.setYLim(minLim, gU.totalInfected);
   plot_NCurrentInfectes.setYLim(minLim, gU.maxCurrentInfected);
-  if((gU.currentInfected <= 10000) && (gU.totalInfected >= carres_number*carres_number))
+  if((gU.currentInfected <= 10000) && (gU.totalInfected >= width_num*height_num))
   {
     finished = true;
   }
+  
+  circle(width/2, 1300, 10);
 }
 
-Cell[][] generateInitialGrid(int num)
+Cell[][] generateInitialGrid(int width_num, int height_num)
 {
-  Cell[][] grid = new Cell[num][num];
+  Cell[][] grid = new Cell[height_num][width_num];
   
-  for(int i = 0; i < num; i++)
+  for(int i = 0; i < height_num; i++)
   {
-    for(int j = 0; j < num; j++)
+    for(int j = 0; j < width_num; j++)
     {
       grid[i][j] = new Cell(0);
     }
   }
   
-  int row = round(random(0.25*float(num), 0.75*float(num))); //make sure the starting point is in the center of the CA
-  int col = round(random(0.25*float(num)/4, 0.75*float(num)));
+  int row = round(random(0.25*float(height_num), 0.75*float(height_num))); //make sure the starting point is in the center of the CA
+  int col = round(random(0.25*float(width_num)/4, 0.75*float(width_num)));
   grid[row][col].state = 1;
   gU.currentInfected++;
   gU.totalInfected ++;
