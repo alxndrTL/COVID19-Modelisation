@@ -1,7 +1,7 @@
 import grafica.*;
 
-int width_num = 960; //460
-int height_num = 250; //125
+int width_num = 480; //480 ou 960
+int height_num = 125; //125 ou 250
 
 GridDisplayer gD;
 GridUpdater gU;
@@ -35,9 +35,9 @@ void setup()
   
   grid = generateInitialGrid(width_num, height_num);
   
-  plot_NTotalInfectes = new Plot(this, new PVector(25, 500), "temps", "infectés");
-  plot_NCurrentInfectes = new Plot(this, new PVector(800, 500), "temps", "infectés courant");
-  plot_TxCroissance = new Plot(this, new PVector(1575, 500), "temps", "croissance");
+  plot_NTotalInfectes = new Plot(this, new PVector(0, 1200), "temps", "infectés");
+  plot_NCurrentInfectes = new Plot(this, new PVector(width/3-300, 1200), "temps", "infectés courant");
+  plot_TxCroissance = new Plot(this, new PVector(width/3*2-300, 1200), "temps", "croissance");
   
   plot_TxCroissance.setYLim(1, 1.5);
   
@@ -94,8 +94,6 @@ void draw()
   {
     finished = true;
   }
-  
-  circle(width/2, 1300, 10);
 }
 
 Cell[][] generateInitialGrid(int width_num, int height_num)
