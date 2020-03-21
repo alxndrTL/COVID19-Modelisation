@@ -15,6 +15,7 @@ class Plot
     // Set the plot title and the axis labels
     plot.getXAxis().setAxisLabelText(xLabel);
     plot.getYAxis().setAxisLabelText(yLabel);
+    plot.getYAxis().getAxisLabel().setOffset(60);
     
     //plot.getYAxis().setOffset(-5);
     plot.getYAxis().setLineColor(255);
