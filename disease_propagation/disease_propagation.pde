@@ -9,18 +9,22 @@ GridUpdater gU;
 Cell[][] grid;
 
 int time = 0;
-boolean finished = false;
 
 boolean logscale = false;
 float minLim = 0;
 
 Plot plot_NTotalInfectes;
 Plot plot_NCurrentInfectes;
-Plot plot_TxCroissance;
+//Plot plot_TxCroissance;
 
 Slider contagiositeSlider;
 Slider tauxGuerisonSlider;
 Slider tauxVoyageSlider;
+
+boolean enPause = false;
+boolean drawPauseOverlay = false;
+
+PFont retroFont;
 
 void setup()
 {
@@ -30,20 +34,21 @@ void setup()
   noStroke();
   background(0);
   
+  retroFont = createFont("Retro Gaming.ttf", 150);
+  
   gD = new GridDisplayer(new PVector(0, 0), 3840, 1000, width_num, height_num);
   gU = new GridUpdater();
   
   grid = generateInitialGrid(width_num, height_num);
   
-  plot_NTotalInfectes = new Plot(this, new PVector(0, 1200), "temps", "infectés");
-  plot_NCurrentInfectes = new Plot(this, new PVector(width/3-300, 1200), "temps", "infectés courant");
-  plot_TxCroissance = new Plot(this, new PVector(width/3*2-300, 1200), "temps", "croissance");
+  plot_NTotalInfectes = new Plot(this, new PVector(width/3-300, 1400), "temps", "infectés");
+  plot_NCurrentInfectes = new Plot(this, new PVector(width/3*2-300, 1400), "temps", "infectés courant");
+  //plot_TxCroissance = new Plot(this, new PVector(width/3*2-300, 1200), "temps", "croissance");
+  //plot_TxCroissance.setYLim(1, 1.5);
   
-  plot_TxCroissance.setYLim(1, 1.5);
-  
-  contagiositeSlider = new Slider(new PVector(width/2 - 300, 1100), 400, 30, 0, 0.3, "contagiosité", 25);
-  tauxGuerisonSlider = new Slider(new PVector(width/2 - 300, 1150), 400, 30, 0, 0.5, "taux de guérison", 25);
-  tauxVoyageSlider = new Slider(new PVector(width/2 - 300, 1200), 400, 30, 0, 1, "taux de voyage", 25);
+  contagiositeSlider = new Slider(new PVector(width/2 - 350, 1100), 400, 30, 0, 0.3, "contagiosité", 25);
+  tauxGuerisonSlider = new Slider(new PVector(width/2 - 350, 1150), 400, 30, 0, 0.5, "taux de guérison", 25);
+  tauxVoyageSlider = new Slider(new PVector(width/2 - 350, 1200), 400, 30, 0, 1, "taux de voyage", 25);
   
   contagiositeSlider.setValue(0.01);
   tauxGuerisonSlider.setValue(0.01);
@@ -66,34 +71,51 @@ void draw()
     minLim = 0;
   }
   
-  if(!finished)
+  if(!enPause)
   {
-    gU.updateParams(contagiositeSlider.getValue(), tauxGuerisonSlider.getValue(), tauxVoyageSlider.getValue());
-    grid = gU.update(grid);
-    plot_NTotalInfectes.addPoint(time, gU.totalInfected);
-    plot_NTotalInfectes.setXLim(minLim, time);
-    
-    plot_NCurrentInfectes.addPoint(time, gU.currentInfected);
-    plot_NCurrentInfectes.setXLim(minLim, time);
-    
-    plot_TxCroissance.addPoint(time, gU.txCroissance);
-    plot_TxCroissance.setXLim(minLim, time);
+    iterate();
   }
   
   gD.display(grid);
   
   plot_NTotalInfectes.display();
   plot_NCurrentInfectes.display();
-  plot_TxCroissance.display();
+  //plot_TxCroissance.display();
   
-  time++;
-  
-  plot_NTotalInfectes.setYLim(minLim, gU.totalInfected);
-  plot_NCurrentInfectes.setYLim(minLim, gU.maxCurrentInfected);
-  if((gU.currentInfected <= 10000) && (gU.totalInfected >= width_num*height_num))
+  if(drawPauseOverlay)
   {
-    finished = true;
+    drawPauseOverlay();
   }
+}
+
+void iterate()
+{
+  gU.updateParams(contagiositeSlider.getValue(), tauxGuerisonSlider.getValue(), tauxVoyageSlider.getValue());
+  grid = gU.update(grid);
+    
+  plot_NTotalInfectes.addPoint(time, gU.totalInfected);
+  plot_NTotalInfectes.setXLim(minLim, time);
+  plot_NTotalInfectes.setYLim(minLim, gU.totalInfected);
+    
+  plot_NCurrentInfectes.addPoint(time, gU.currentInfected);
+  plot_NCurrentInfectes.setXLim(minLim, time);
+  plot_NCurrentInfectes.setYLim(minLim, gU.maxCurrentInfected);
+
+  //plot_TxCroissance.addPoint(time, gU.txCroissance);
+  //plot_TxCroissance.setXLim(minLim, time);
+    
+  time++;
+}
+
+void drawPauseOverlay()
+{ 
+  fill(0);
+  rect(width/2-295, 500-100, 590, 200);
+  
+  fill(255);
+  textSize(200);
+  textFont(retroFont);
+  text("PAUSE", width/2-295, 500-100, 590, 200);
 }
 
 Cell[][] generateInitialGrid(int width_num, int height_num)
@@ -136,4 +158,26 @@ void mouseReleased()
   contagiositeSlider.mouseReleased_class();
   tauxGuerisonSlider.mouseReleased_class();
    tauxVoyageSlider.mouseReleased_class();   
+}
+
+void keyPressed()
+{
+  if(key == ' ')
+  {
+    if(enPause)
+    {
+      enPause = false;
+      drawPauseOverlay = false;
+    }else
+    {
+      enPause = true;
+      drawPauseOverlay = true;
+    }
+  }
+  
+  if((keyCode == RIGHT) && (enPause))
+  {
+    drawPauseOverlay = false;
+    iterate();
+  }
 }

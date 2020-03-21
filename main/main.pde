@@ -6,7 +6,7 @@ Cell[][] grid;
 
 void setup()
 {
-  fullScreen();
+  fullScreen(1);
   //size(800, 800);
   
   noStroke();

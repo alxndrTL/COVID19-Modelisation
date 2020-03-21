@@ -13,6 +13,8 @@ class Slider
   boolean locked = false;
   float xoff;
   
+  PFont cmuFont;
+  
   Slider(PVector _startingPos, float _size, float _slider_radius, float _minValue, float _maxValue, String _nameValue, float _nameSize)
   {
     startingPos = _startingPos;
@@ -27,8 +29,7 @@ class Slider
     posx = 0.8;//defaultValue;
     posy = startingPos.y;
     
-    PFont cmuFont = createFont("cmunrm.ttf", nameSize);
-    textFont(cmuFont);
+    cmuFont = createFont("cmunrm.ttf", nameSize);
   }
   
   void display()
@@ -52,7 +53,10 @@ class Slider
     
     fill(255, 9, 50);
     circle(posx, posy, slider_radius);
+    noStroke();
     fill(255);
+    textSize(25);
+    textFont(cmuFont);
     text(nameValue + " = " + nf(map(posx, startingPos.x, startingPos.x+size, minValue, maxValue), 1, 2), startingPos.x+size+20, posy+5);
   }
   
