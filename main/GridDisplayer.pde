@@ -22,16 +22,18 @@ class GridDisplayer
     {
       for(int j = 0; j < num; j++)
       {
-        float x = map(j, 0, num, start_point.y, stop_point.y);
-        float y = map(i, 0, num, start_point.x, stop_point.x);
+        float x = map(j, 0, num, start_point.x, stop_point.x);
+        float y = map(i, 0, num, start_point.y, stop_point.y);
         
         if(grid[i][j].state == 0)
         {
-          fill(238, 130, 238); //violet
+          //fill(238, 130, 238); //violet
+          fill(255);
         }
         else if(grid[i][j].state == 1)
         {
-          fill(100, 150, 160); //bleu
+          //fill(100, 150, 160); //bleu
+          fill(0);
         }else
         {
           fill(255);

@@ -6,12 +6,13 @@ Cell[][] grid;
 
 void setup()
 {
-  size(800, 800);
+  fullScreen();
+  //size(800, 800);
   
   noStroke();
   background(0);
   
-  gD = new GridDisplayer(new PVector(0, 0), 400, carres_number);
+  gD = new GridDisplayer(new PVector(width/2-250, height/2-250), 500, carres_number);
   gU = new GridUpdater();
   
   grid = generateInitialGrid(carres_number);  
