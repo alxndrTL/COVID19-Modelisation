@@ -17,10 +17,10 @@ class GridUpdater
     let height_num = grid.length;
 
     let newGrid = [];
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < height_num; i++)
     {
       newGrid[i] = [];
-      for (var j = 0; j < 10; j++) {
+      for (var j = 0; j < width_num; j++) {
         newGrid[i][j] = new Cell(grid[i][j].state);
       }
     }

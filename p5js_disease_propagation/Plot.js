@@ -50,6 +50,7 @@ class Plot
 
   display()
   {
+    textSize(12);
     this.plot.beginDraw();
     this.plot.setAxesOffset(0);
     this.plot.drawXAxis();

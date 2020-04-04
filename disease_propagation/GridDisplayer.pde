@@ -1,4 +1,4 @@
-// display a 2 dimensional grid
+  // display a 2 dimensional grid
 
 class GridDisplayer
 {

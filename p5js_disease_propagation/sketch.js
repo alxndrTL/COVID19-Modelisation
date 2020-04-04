@@ -1,5 +1,5 @@
-let width_num = 10;
-let height_num = 10;
+let width_num = 480;
+let height_num = 100;
 let grid;
 let gD;
 let gU;
@@ -12,11 +12,11 @@ let minLim = 0;
 let time = 0;
 let enPause = false;
 let boolDrawPauseOverlay = false;
-let retroFont;
+//let retroFont;
 
 function preload()
 {
-  retroFont = loadFont('assets/Retro-Gaming.ttf');
+  //retroFont = loadFont('assets/Retro-Gaming.ttf');
 }
 
 function setup()
@@ -24,7 +24,7 @@ function setup()
   createCanvas(windowWidth, windowHeight);
 
   gU = new GridUpdater();
-  gD = new GridDisplayer(new p5.Vector(0, 0), 100, 100, width_num, height_num);
+  gD = new GridDisplayer(new p5.Vector(0, 0), windowWidth, 400, width_num, height_num);
   grid = generateInitialGrid(width_num, height_num);
 
   plot_totalInfectes = new Plot(this, new p5.Vector(width/3-300, 200), "temps", "infectés");
@@ -75,7 +75,7 @@ function drawPauseOverlay()
 
   fill(255);
   textSize(200);
-  textFont(retroFont);
+  //textFont(retroFont);
   text("PAUSE", width/2-295, 500-100, 590, 200);
 }
 
